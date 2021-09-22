@@ -10,7 +10,6 @@
     "execute:standard-draw:mainnet": "npx hardhat run scripts/standard/draw-lottery.js --network mainnet",
     "execute:standard-burn:testnet": "npx hardhat run scripts/standard/burn-unclaimed.js --network testnet",
     "execute:standard-burn:mainnet": "npx hardhat run scripts/standard/burn-unclaimed.js --network mainnet",
-
     "execute:special-start:testnet": "npx hardhat run scripts/special/start-lottery.js --network testnet",
     "execute:special-start:mainnet": "npx hardhat run scripts/special/start-lottery.js --network mainnet",
     "execute:special-close:testnet": "npx hardhat run scripts/special/close-lottery.js --network testnet",
@@ -39,5 +38,10 @@
     "prettier-plugin-solidity": "^1.0.0-beta.18",
     "solhint": "^3.3.6",
     "solidity-coverage": "^0.7.17"
+  },
+  "dependencies": {
+    "moment": "^2.29.1",
+    "winston": "^3.3.3",
+    "winston-daily-rotate-file": "^4.5.5"
   }
 }
