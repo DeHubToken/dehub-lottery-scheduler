@@ -1,7 +1,7 @@
-const { ethers, network } = require("hardhat");
-const StandardLotteryAbi = requrie("abis/StandardLottery.json");
-const config = require("../../config");
-const logger = requrie("../../utils/logger");
+import { ethers, network } from "hardhat";
+import StandardLotteryAbi from "../../abis/StandardLottery.json";
+import config from "../../config";
+import logger from "../../utils/logger";
 
 const main = async () => {
   const [operator] = await ethers.getSigners();

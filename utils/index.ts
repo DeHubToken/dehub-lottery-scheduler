@@ -1,4 +1,4 @@
-const moment = require("moment");
+import moment from "moment";
 
 /**
  * Get the next lottery 'endTime', based on current date, as UTC.

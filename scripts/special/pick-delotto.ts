@@ -1,7 +1,7 @@
-const { ethers, network } = require("hardhat");
-const SpecialLotteryAbi = requrie("abis/SpecialLottery.json");
-const config = require("../../config");
-const logger = requrie("../../utils/logger");
+import { ethers, network } from "hardhat";
+import SpecialLotteryAbi from "../../abis/SpecialLottery.json";
+import config from "../../config";
+import logger from "../../utils/logger";
 
 const main = async () => {
   const [operator] = await ethers.getSigners();
@@ -25,22 +25,22 @@ const main = async () => {
       );
 
       // Get network data for running script.
-      const [_blockNumber, _gasPrice] = await Promise.all([
+      const [_blockNumber, _gasPrice, _lotteryId] = await Promise.all([
         ethers.provider.getBlockNumber(),
         ethers.provider.getGasPrice(),
+        contract.currentLotteryId()
       ]);
 
       // Create, sign and broadcast transaction.
-      const tx = await contract.startLottery(
-        getEndTime(config.Interval),
-        config.Ticket.Price,
+      const tx = await contract.pickAwardWinners(
+        _lotteryId.toString(),
         { gasLimit: 500000, gasPrice: _gasPrice.mul(2), from: operator.address }
       );
 
       const message = `[${new Date().toISOString()}] \
         network=${networkName} \
         block=${_blockNumber.toString()} \
-        message='Started special lottery' \
+        message='Picked DeLotto second stage winners' \
         hash=${tx?.hash} \
         signer=${operator.address}`;
       console.log(message);

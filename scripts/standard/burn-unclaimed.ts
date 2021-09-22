@@ -1,7 +1,7 @@
-const { ethers, network } = require("hardhat");
-const SpecialLotteryAbi = requrie("abis/SpecialLottery.json");
-const config = require("../../config");
-const logger = requrie("../../utils/logger");
+import { ethers, network } from "hardhat";
+import StandardLotteryAbi from "../../abis/StandardLottery.json";
+import config from "../../config";
+import logger from "../../utils/logger";
 
 const main = async () => {
   const [operator] = await ethers.getSigners();
@@ -13,15 +13,15 @@ const main = async () => {
       throw new Error("Missing private key (signer).");
     }
     // Check if the Dehub Lottery smart contract address is set.
-    if (config.SpecialLottery.Address[networkName] === ethers.constants.AddressZero) {
+    if (config.StandardLottery.Address[networkName] === ethers.constants.AddressZero) {
       throw new Error("Missing smart contract (Lottery) address.");
     }
 
     try {
       // Bind the smart contract address to the ABI, for a given network.
       const contract = await ethers.getContractAt(
-        SpecialLotteryAbi,
-        config.SpecialLottery.Address[networkName]
+        StandardLotteryAbi,
+        config.StandardLottery.Address[networkName]
       );
 
       // Get network data for running script.
@@ -32,7 +32,7 @@ const main = async () => {
       ]);
 
       // Create, sign and broadcast transaction.
-      const tx = await contract.pickAwardWinners(
+      const tx = await contract.burnUnclaimed(
         _lotteryId.toString(),
         { gasLimit: 500000, gasPrice: _gasPrice.mul(2), from: operator.address }
       );
@@ -40,7 +40,7 @@ const main = async () => {
       const message = `[${new Date().toISOString()}] \
         network=${networkName} \
         block=${_blockNumber.toString()} \
-        message='Picked DeLotto second stage winners' \
+        message='Burned unclaimed in standard lottery' \
         hash=${tx?.hash} \
         signer=${operator.address}`;
       console.log(message);

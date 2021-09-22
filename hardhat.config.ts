@@ -1,9 +1,9 @@
-require("dotenv").config();
-
-require("@nomiclabs/hardhat-etherscan");
-require("@nomiclabs/hardhat-waffle");
-require("hardhat-gas-reporter");
-require("solidity-coverage");
+import "dotenv/config";
+import type { HardhatUserConfig } from "hardhat/types";
+import { task } from "hardhat/config";
+import "@nomiclabs/hardhat-etherscan";
+import "@nomiclabs/hardhat-waffle";
+import "hardhat-gas-reporter";
 
 // This is a sample Hardhat task. To learn how to create your own go to
 // https://hardhat.org/guides/create-task.html
@@ -21,7 +21,7 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
 /**
  * @type import('hardhat/config').HardhatUserConfig
  */
-module.exports = {
+ const config: HardhatUserConfig = {
   solidity: "0.8.4",
   networks: {
     testnet: {
@@ -40,3 +40,5 @@ module.exports = {
     currency: "USD",
   }
 };
+
+export default config;
