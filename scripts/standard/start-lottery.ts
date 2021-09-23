@@ -1,12 +1,19 @@
 import { ethers, network } from "hardhat";
+import {
+  TransactionReceipt,
+  TransactionResponse
+} from "@ethersproject/abstract-provider";
 import StandardLotteryAbi from "../../abis/StandardLottery.json";
 import config from "../../config";
-import logger from "../../utils/logger";
+import { logI, logE } from "../../utils/logger";
+import { getEndTime } from "../../utils/index";
 
 const main = async () => {
   const [operator] = await ethers.getSigners();
+  logI(`Operator Address: ${operator.address}`);
 
   const networkName = network.name;
+  logI(`Network: ${networkName}`);
   if (networkName === "testnet" || networkName === "mainnet") {
     // Check if the private key is set (see ethers.js signer).
     if (!process.env.OPERATOR_PRIVATE_KEY) {
@@ -23,6 +30,7 @@ const main = async () => {
         StandardLotteryAbi,
         config.StandardLottery.Address[networkName]
       );
+      logI(`Contract Address: ${contract.address}`);
 
       // Get network data for running script.
       const [_blockNumber, _gasPrice] = await Promise.all([
@@ -31,36 +39,42 @@ const main = async () => {
       ]);
 
       // Create, sign and broadcast transaction.
-      const tx = await contract.startLottery(
+      const tx: TransactionResponse = await contract.startLottery(
         getEndTime(config.Interval),
         config.Ticket.Price,
         config.StandardLottery.Reward[networkName],
         { gasLimit: 500000, gasPrice: _gasPrice.mul(2), from: operator.address }
       );
 
-      const message = `[${new Date().toISOString()}] \
-        network=${networkName} \
-        block=${_blockNumber.toString()} \
-        message='Started standard lottery' \
-        hash=${tx?.hash} \
-        signer=${operator.address}`;
-      console.log(message);
-      logger.info({ message });
+      const message = 
+        `network=${networkName} ` +
+        `block=${_blockNumber.toString()} ` +
+        `message='Started standard lottery' ` +
+        `hash=${tx?.hash} ` +
+        `signer=${operator.address}`;
+      logI(message);
+
+      tx.wait().then((receipt: TransactionReceipt) => {
+        logI(`Transaction receipt: ${receipt.transactionHash}`);
+        return true;
+      }, (error) => {
+        logE(`Transaction failed: reason=${error.reason} hash=${tx?.hash}`);
+      });
 
     } catch (error) {
-      const message = `[${new Date().toISOString()}] network=${networkName} message='${error.message}' signer=${
+      let _error: Error = error as Error;
+      const message = `network=${networkName} message='${_error.message}' signer=${
         operator.address
       }`;
-      console.error(message);
-      logger.error({ message });
+      logE(message);
     }
   } else {
-    const message = `[${new Date().toISOString()}] network=${networkName} message='Unsupported network'`;
-    console.error(message);
-    logger.error({ message });
+    const message = `network=${networkName} message='Unsupported network'`;
+    logE(message);
   }
 
-  console.log(operator);
+  const balanceLog = `BNB Balance: ${ethers.utils.formatEther(await operator.getBalance())}`;
+  logI(balanceLog);
 }
 
 main().catch((error) => {
