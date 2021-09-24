@@ -1,0 +1,49 @@
+{
+  "name": "dehub-lottery-scheduler",
+  "version": "1.0.0",
+  "scripts": {
+    "execute:standard-start:testnet": "npx hardhat run scripts/standard/start-lottery.ts --network testnet",
+    "execute:standard-start:mainnet": "npx hardhat run scripts/standard/start-lottery.ts --network mainnet",
+    "execute:standard-close:testnet": "npx hardhat run scripts/standard/close-lottery.ts --network testnet",
+    "execute:standard-close:mainnet": "npx hardhat run scripts/standard/close-lottery.ts --network mainnet",
+    "execute:standard-draw:testnet": "npx hardhat run scripts/standard/draw-lottery.ts --network testnet",
+    "execute:standard-draw:mainnet": "npx hardhat run scripts/standard/draw-lottery.ts --network mainnet",
+    "execute:standard-burn:testnet": "npx hardhat run scripts/standard/burn-unclaimed.ts --network testnet",
+    "execute:standard-burn:mainnet": "npx hardhat run scripts/standard/burn-unclaimed.ts --network mainnet",
+    "execute:special-start:testnet": "npx hardhat run scripts/special/start-lottery.ts --network testnet",
+    "execute:special-start:mainnet": "npx hardhat run scripts/special/start-lottery.ts --network mainnet",
+    "execute:special-close:testnet": "npx hardhat run scripts/special/close-lottery.ts --network testnet",
+    "execute:special-close:mainnet": "npx hardhat run scripts/special/close-lottery.ts --network mainnet",
+    "execute:special-pick:testnet": "npx hardhat run scripts/special/pick-delotto.ts --network testnet",
+    "execute:special-pick:mainnet": "npx hardhat run scripts/special/pick-delotto.ts --network mainnet"
+  },
+  "devDependencies": {
+    "@nomiclabs/hardhat-ethers": "^2.0.2",
+    "@nomiclabs/hardhat-etherscan": "^2.1.6",
+    "@nomiclabs/hardhat-waffle": "^2.0.1",
+    "chai": "^4.3.4",
+    "dotenv": "^10.0.0",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.24.2",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^3.4.1",
+    "eslint-plugin-promise": "^5.1.0",
+    "ethereum-waffle": "^3.4.0",
+    "ethers": "^5.4.7",
+    "hardhat": "^2.6.4",
+    "hardhat-gas-reporter": "^1.0.4",
+    "prettier": "^2.4.1",
+    "prettier-plugin-solidity": "^1.0.0-beta.18",
+    "solhint": "^3.3.6",
+    "solidity-coverage": "^0.7.17",
+    "ts-node": "^10.2.1",
+    "typescript": "^4.4.3"
+  },
+  "dependencies": {
+    "moment": "^2.29.1",
+    "winston": "^3.3.3",
+    "winston-daily-rotate-file": "^4.5.5"
+  }
+}
