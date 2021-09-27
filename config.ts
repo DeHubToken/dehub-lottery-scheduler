@@ -27,5 +27,10 @@ export default {
         testnet: "0xcaf3c3727e033261d383b315559476f48034c13b18f8cafed4d871abe5049186",
       },
     },
+  },
+  SendGrid: {
+    from: "dehub.lottery@dehub.net",
+    to: "dehub.lottery.report@dehub.net",
+    subject: "Lottery Report",
   }
 }

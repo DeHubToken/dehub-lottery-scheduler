@@ -81,3 +81,7 @@ Picking winners in DeGrand second stage will take place on:
 
 ### Logging
 Logs will be generated at `logs/lottery-YYYY-MM-DD.log`.
+
+
+### Notification
+If transaction failed, service will send email automatically.
