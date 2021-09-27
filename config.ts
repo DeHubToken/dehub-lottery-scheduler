@@ -29,7 +29,7 @@ export default {
     },
   },
   SendGrid: {
-    from: "dehub.lottery@dehub.net",
+    from: "tech@dehub.net",
     to: "dehub.lottery.report@dehub.net",
     subject: "Lottery Report",
   }
