@@ -68,3 +68,4 @@ export const emailTransError = async ({
       `Failed to send email, code=${err.code}, message=${err.message}`;
     logE(message);
   }
+}
