@@ -6,7 +6,7 @@ import {
 import StandardLotteryAbi from "../../abis/StandardLottery.json";
 import config from "../../config";
 import { logI, logE } from "../../utils/logger";
-import { getEndTime } from "../../utils/index";
+import { getEndTime, emailTransError } from "../../utils/index";
 
 const main = async () => {
   const [operator] = await ethers.getSigners();
@@ -59,6 +59,15 @@ const main = async () => {
         return true;
       }, (error) => {
         logE(`Transaction failed: reason=${error.reason} hash=${tx?.hash}`);
+
+        emailTransError({
+          'from': config.SendGrid.from,
+          'to': config.SendGrid.to,
+          'subject': config.SendGrid.subject,
+          'reason': error.reason,
+          'txid': tx?.hash,
+          'signer': `${operator.address}`
+        });
       });
 
     } catch (error) {
@@ -67,6 +76,15 @@ const main = async () => {
         operator.address
       }`;
       logE(message);
+
+      emailTransError({
+        'from': config.SendGrid.from,
+        'to': config.SendGrid.to,
+        'subject': config.SendGrid.subject,
+        'reason': _error.message,
+        'txid': '',
+        'signer': `${operator.address}`
+      });
     }
   } else {
     const message = `network=${networkName} message='Unsupported network'`;
