@@ -48,8 +48,8 @@ Burnning will take place on:
 59 23 28-31 * * [ `date -d +'1 day' +\%d` -eq 1 ] && cd ~/dehub-lottery-scheduler && yarn execute:standard-burn:mainnet
 
 # Start standard lottery
-6 */6 1-25 1,3-12 * cd ~/dehub-lottery-scheduler && yarn execute:standard-start:mainnet
-6 */6 1-24 2 * cd ~/dehub-lottery-scheduler && yarn execute:standard-close:mainnet
+5 */6 1-25 1,3-12 * cd ~/dehub-lottery-scheduler && yarn execute:standard-start:mainnet
+5 */6 1-24 2 * cd ~/dehub-lottery-scheduler && yarn execute:standard-close:mainnet
 ```
 
 #### Commands for Special Lottery
