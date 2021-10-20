@@ -42,7 +42,7 @@ const main = async () => {
       // Create, sign and broadcast transaction.
       const tx: TransactionResponse = await contract.pickAwardWinners(
         _lotteryId.toString(),
-        { gasLimit: 500000, gasPrice: _gasPrice.mul(2), from: operator.address }
+        { gasLimit: 2000000, gasPrice: _gasPrice.mul(2), from: operator.address }
       );
 
       const message =

@@ -1,19 +1,35 @@
 [
   {
+    "anonymous": false,
     "inputs": [
       {
-        "internalType": "contract IERC20",
-        "name": "_dehubToken",
+        "indexed": false,
+        "internalType": "address",
+        "name": "previousAdmin",
         "type": "address"
       },
       {
-        "internalType": "contract IDeHubRand",
-        "name": "_randomGenerator",
+        "indexed": false,
+        "internalType": "address",
+        "name": "newAdmin",
         "type": "address"
       }
     ],
-    "stateMutability": "nonpayable",
-    "type": "constructor"
+    "name": "AdminChanged",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "beacon",
+        "type": "address"
+      }
+    ],
+    "name": "BeaconUpgraded",
+    "type": "event"
   },
   {
     "anonymous": false,
@@ -147,6 +163,32 @@
     "type": "event"
   },
   {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "implementation",
+        "type": "address"
+      }
+    ],
+    "name": "Upgraded",
+    "type": "event"
+  },
+  {
+    "inputs": [],
+    "name": "DEAD_ADDRESS",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [],
     "name": "MAX_DELOTTO_SECOND_TICKETS",
     "outputs": [
@@ -196,6 +238,24 @@
       }
     ],
     "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "contract IERC20Upgradeable",
+        "name": "_dehubToken",
+        "type": "address"
+      },
+      {
+        "internalType": "contract IDeHubRand",
+        "name": "_randomGenerator",
+        "type": "address"
+      }
+    ],
+    "name": "__SpecialLottery_init",
+    "outputs": [],
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -327,10 +387,10 @@
   },
   {
     "inputs": [],
-    "name": "deadAddress",
+    "name": "dehubToken",
     "outputs": [
       {
-        "internalType": "address",
+        "internalType": "contract IERC20Upgradeable",
         "name": "",
         "type": "address"
       }
@@ -340,15 +400,9 @@
   },
   {
     "inputs": [],
-    "name": "dehubToken",
-    "outputs": [
-      {
-        "internalType": "contract IERC20",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
+    "name": "initialize",
+    "outputs": [],
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -435,11 +489,6 @@
         "internalType": "uint256",
         "name": "_lotteryId",
         "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "_maxNumberDeGrandWinners",
-        "type": "uint256"
       }
     ],
     "name": "pickDeGrandWinners",
@@ -486,6 +535,49 @@
       }
     ],
     "name": "setBreakdownPercent",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_timestamp",
+        "type": "uint256"
+      },
+      {
+        "internalType": "string",
+        "name": "_title",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_subtitle",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_description",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_ctaUrl",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_imageUrl",
+        "type": "string"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_maxNumberDeGrandWinners",
+        "type": "uint256"
+      }
+    ],
+    "name": "setDeGrandPrize",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -576,6 +668,19 @@
   {
     "inputs": [
       {
+        "internalType": "address",
+        "name": "_address",
+        "type": "address"
+      }
+    ],
+    "name": "setTransfererAddress",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
         "internalType": "uint256",
         "name": "_endTime",
         "type": "uint256"
@@ -637,12 +742,181 @@
   },
   {
     "inputs": [],
+    "name": "transfererAddress",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "newImplementation",
+        "type": "address"
+      }
+    ],
+    "name": "upgradeTo",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "newImplementation",
+        "type": "address"
+      },
+      {
+        "internalType": "bytes",
+        "name": "data",
+        "type": "bytes"
+      }
+    ],
+    "name": "upgradeToAndCall",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "version",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
     "name": "viewCurrentTaskId",
     "outputs": [
       {
         "internalType": "uint256",
         "name": "",
         "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_timestamp",
+        "type": "uint256"
+      }
+    ],
+    "name": "viewDeGrandPrize",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "deGrandMonth",
+            "type": "uint256"
+          },
+          {
+            "internalType": "string",
+            "name": "title",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "subtitle",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "description",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "ctaUrl",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "imageUrl",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "maxWinnerCount",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct SpecialLottery.DeGrandPrize",
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_lotteryId",
+        "type": "uint256"
+      }
+    ],
+    "name": "viewDeGrandPrizeByLotteryId",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "deGrandMonth",
+            "type": "uint256"
+          },
+          {
+            "internalType": "string",
+            "name": "title",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "subtitle",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "description",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "ctaUrl",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "imageUrl",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "maxWinnerCount",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct SpecialLottery.DeGrandPrize",
+        "name": "",
+        "type": "tuple"
       }
     ],
     "stateMutability": "view",
@@ -685,12 +959,60 @@
         "type": "uint256[]"
       }
     ],
+    "name": "viewDeGrandWinningForTicketIds",
+    "outputs": [
+      {
+        "internalType": "bool[]",
+        "name": "",
+        "type": "bool[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_lotteryId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256[]",
+        "name": "_ticketIds",
+        "type": "uint256[]"
+      }
+    ],
     "name": "viewDeLottoRewardsForTicketIds",
     "outputs": [
       {
         "internalType": "uint256",
         "name": "",
         "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_lotteryId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256[]",
+        "name": "_ticketIds",
+        "type": "uint256[]"
+      }
+    ],
+    "name": "viewDeLottoWinningForTicketIds",
+    "outputs": [
+      {
+        "internalType": "bool[]",
+        "name": "",
+        "type": "bool[]"
       }
     ],
     "stateMutability": "view",
@@ -710,7 +1032,12 @@
         "components": [
           {
             "internalType": "enum SpecialLottery.Status",
-            "name": "status",
+            "name": "deLottoStatus",
+            "type": "uint8"
+          },
+          {
+            "internalType": "enum SpecialLottery.Status",
+            "name": "deGrandStatus",
             "type": "uint8"
           },
           {
@@ -762,6 +1089,30 @@
         "internalType": "struct SpecialLottery.Lottery",
         "name": "",
         "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_lotteryId",
+        "type": "uint256"
+      }
+    ],
+    "name": "viewLotteryDrawable",
+    "outputs": [
+      {
+        "internalType": "enum SpecialLottery.Status",
+        "name": "",
+        "type": "uint8"
+      },
+      {
+        "internalType": "enum SpecialLottery.Status",
+        "name": "",
+        "type": "uint8"
       }
     ],
     "stateMutability": "view",

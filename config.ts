@@ -2,7 +2,7 @@ export default {
   StandardLottery: {
     Address: {
       mainnet: "",
-      testnet: "0xB5FA0844CEFff47D3A0D8023eFF54b3fBBabC706",
+      testnet: "0xA452e1F38780850916E226Af23d8F1ca61CDD4fD",
     },
     Reward: {
       mainnet: [0, 1000, 2500, 10000],
@@ -12,12 +12,12 @@ export default {
   SpecialLottery: {
     Address: {
       mainnet: "",
-      testnet: "0x596F2b7E7Fb04114ac44E61b67a5BC5600c9e146"
+      testnet: "0x27304E4620fB6024ffd5d32a7f48F8c934a99d35"
     }
   },
   Interval: 21600, // uint in seconds
   Ticket: {
-    Price: 50000
+    Price: 100000000
   },
   Chainlink: {
     VRF: {
