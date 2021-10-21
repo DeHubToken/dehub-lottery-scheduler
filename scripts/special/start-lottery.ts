@@ -40,7 +40,7 @@ const main = async () => {
 
       // Create, sign and broadcast transaction.
       const tx: TransactionResponse = await contract.startLottery(
-        getEndTime(config.Interval),
+        getEndTime(config.SpecialLottery.Interval),
         config.Ticket.Price,
         { gasLimit: 500000, gasPrice: _gasPrice.mul(2), from: operator.address }
       );
