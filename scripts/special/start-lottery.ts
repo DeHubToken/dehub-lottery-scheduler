@@ -38,6 +38,16 @@ const main = async () => {
         ethers.provider.getGasPrice(),
       ]);
 
+      // Check if contract is paused
+      const paused = await contract.paused();
+
+      const message2 = `Contract was ${paused ? 'paused' : 'not paused'}`;
+      logI(message2);
+
+      if (paused) { // if paused, do not call
+        return;
+      }
+
       // Create, sign and broadcast transaction.
       const tx: TransactionResponse = await contract.startLottery(
         getEndTime(config.SpecialLottery.Interval),

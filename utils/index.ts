@@ -7,16 +7,16 @@ import { logI, logE } from "./logger";
  * Used by 'start-lottery' Hardhat script, only.
  */
 export const getEndTime = (seconds: number) => {
-  return moment()
-    .add(seconds, "seconds")
-    .startOf("hour")
-    .utc()
-    .unix();
-
   // return moment()
   //   .add(seconds, "seconds")
+  //   .startOf("hour")
   //   .utc()
   //   .unix();
+
+  return moment()
+    .add(seconds, "seconds")
+    .utc()
+    .unix();
 };
 
 export const emailTransError = async ({

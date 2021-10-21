@@ -62,25 +62,6 @@
       {
         "indexed": false,
         "internalType": "uint256",
-        "name": "finalNumber",
-        "type": "uint256"
-      }
-    ],
-    "name": "LotteryNumberDrawn",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "uint256",
-        "name": "lotteryId",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
         "name": "startTime",
         "type": "uint256"
       },
@@ -100,6 +81,12 @@
         "indexed": false,
         "internalType": "uint256",
         "name": "firstTicketId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "unwonPreviousPot",
         "type": "uint256"
       }
     ],
@@ -123,6 +110,81 @@
       }
     ],
     "name": "OwnershipTransferred",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [],
+    "name": "Pause",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "account",
+        "type": "address"
+      }
+    ],
+    "name": "Paused",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "lotteryId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "maxPickedCount",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "finalNumber",
+        "type": "uint256"
+      }
+    ],
+    "name": "PickAwardWinners",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "lotteryId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "drawTime",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "maxWinnerCount",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "finalNumber",
+        "type": "uint256"
+      }
+    ],
+    "name": "PickDeGrandWinners",
     "type": "event"
   },
   {
@@ -183,6 +245,25 @@
   },
   {
     "anonymous": false,
+    "inputs": [],
+    "name": "Unpause",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "account",
+        "type": "address"
+      }
+    ],
+    "name": "Unpaused",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
     "inputs": [
       {
         "indexed": true,
@@ -209,46 +290,7 @@
   },
   {
     "inputs": [],
-    "name": "MAX_BUNDLE_RULES",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "MAX_LENGTH_LOTTERY",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "MAX_TICKETS_PER_BUYCLAIM",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "MIN_LENGTH_LOTTERY",
+    "name": "MAX_DELOTTO_SECOND_TICKETS",
     "outputs": [
       {
         "internalType": "uint256",
@@ -272,7 +314,7 @@
         "type": "address"
       }
     ],
-    "name": "__StandardLottery_init",
+    "name": "__SpecialLottery_init",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -333,55 +375,13 @@
     "inputs": [
       {
         "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "name": "bundleRules",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "purchasedTickets",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "freeTickets",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "_lotteryId",
-        "type": "uint256"
-      }
-    ],
-    "name": "burnUnclaimed",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
         "name": "_lotteryId",
         "type": "uint256"
       },
       {
         "internalType": "uint256",
-        "name": "_purchasedTicketCount",
+        "name": "_ticketCount",
         "type": "uint256"
-      },
-      {
-        "internalType": "uint256[]",
-        "name": "_ticketNumbers",
-        "type": "uint256[]"
       }
     ],
     "name": "buyTickets",
@@ -399,11 +399,6 @@
       {
         "internalType": "uint256[]",
         "name": "_ticketIds",
-        "type": "uint256[]"
-      },
-      {
-        "internalType": "uint256[]",
-        "name": "_brackets",
         "type": "uint256[]"
       }
     ],
@@ -453,10 +448,10 @@
   },
   {
     "inputs": [],
-    "name": "deGrandAddress",
+    "name": "deLottoAddress",
     "outputs": [
       {
-        "internalType": "address",
+        "internalType": "contract DeHubLotterysAbstract",
         "name": "",
         "type": "address"
       }
@@ -475,19 +470,6 @@
       }
     ],
     "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "_lotteryId",
-        "type": "uint256"
-      }
-    ],
-    "name": "drawFinalNumber",
-    "outputs": [],
-    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -564,6 +546,52 @@
   },
   {
     "inputs": [],
+    "name": "pause",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "paused",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_lotteryId",
+        "type": "uint256"
+      }
+    ],
+    "name": "pickAwardWinners",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_lotteryId",
+        "type": "uint256"
+      }
+    ],
+    "name": "pickDeGrandWinners",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
     "name": "randomGenerator",
     "outputs": [
       {
@@ -614,16 +642,41 @@
     "inputs": [
       {
         "internalType": "uint256",
-        "name": "_purchasedTickets",
+        "name": "_timestamp",
         "type": "uint256"
       },
       {
+        "internalType": "string",
+        "name": "_title",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_subtitle",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_description",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_ctaUrl",
+        "type": "string"
+      },
+      {
+        "internalType": "string",
+        "name": "_imageUrl",
+        "type": "string"
+      },
+      {
         "internalType": "uint256",
-        "name": "_freeTickets",
+        "name": "_maxNumberDeGrandWinners",
         "type": "uint256"
       }
     ],
-    "name": "setBundleRule",
+    "name": "setDeGrandPrize",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -631,12 +684,12 @@
   {
     "inputs": [
       {
-        "internalType": "address",
+        "internalType": "contract DeHubLotterysAbstract",
         "name": "_address",
         "type": "address"
       }
     ],
-    "name": "setDeGrandAddress",
+    "name": "setDeLottoAddress",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -735,11 +788,6 @@
         "internalType": "uint256",
         "name": "_ticketRate",
         "type": "uint256"
-      },
-      {
-        "internalType": "uint256[4]",
-        "name": "_rewardBreakdown",
-        "type": "uint256[4]"
       }
     ],
     "name": "startLottery",
@@ -805,6 +853,26 @@
     "type": "function"
   },
   {
+    "inputs": [],
+    "name": "unpause",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "unwonPreviousPot",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [
       {
         "internalType": "address",
@@ -850,12 +918,143 @@
   },
   {
     "inputs": [],
-    "name": "viewBundleRule",
+    "name": "viewCurrentTaskId",
     "outputs": [
       {
-        "internalType": "uint256[]",
+        "internalType": "uint256",
         "name": "",
-        "type": "uint256[]"
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_timestamp",
+        "type": "uint256"
+      }
+    ],
+    "name": "viewDeGrandPrize",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "drawTime",
+            "type": "uint256"
+          },
+          {
+            "internalType": "string",
+            "name": "title",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "subtitle",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "description",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "ctaUrl",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "imageUrl",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "maxWinnerCount",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct SpecialLottery.DeGrandPrize",
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_lotteryId",
+        "type": "uint256"
+      }
+    ],
+    "name": "viewDeGrandPrizeByLotteryId",
+    "outputs": [
+      {
+        "components": [
+          {
+            "internalType": "uint256",
+            "name": "drawTime",
+            "type": "uint256"
+          },
+          {
+            "internalType": "string",
+            "name": "title",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "subtitle",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "description",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "ctaUrl",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "imageUrl",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "maxWinnerCount",
+            "type": "uint256"
+          }
+        ],
+        "internalType": "struct SpecialLottery.DeGrandPrize",
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_lotteryId",
+        "type": "uint256"
+      }
+    ],
+    "name": "viewDeGrandStatusForTicketIds",
+    "outputs": [
+      {
+        "internalType": "address[]",
+        "name": "",
+        "type": "address[]"
       },
       {
         "internalType": "uint256[]",
@@ -867,8 +1066,80 @@
     "type": "function"
   },
   {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_lotteryId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256[]",
+        "name": "_ticketIds",
+        "type": "uint256[]"
+      }
+    ],
+    "name": "viewDeGrandWinningForTicketIds",
+    "outputs": [
+      {
+        "internalType": "bool[]",
+        "name": "",
+        "type": "bool[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_lotteryId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256[]",
+        "name": "_ticketIds",
+        "type": "uint256[]"
+      }
+    ],
+    "name": "viewDeLottoRewardsForTicketIds",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_lotteryId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256[]",
+        "name": "_ticketIds",
+        "type": "uint256[]"
+      }
+    ],
+    "name": "viewDeLottoWinningForTicketIds",
+    "outputs": [
+      {
+        "internalType": "bool[]",
+        "name": "",
+        "type": "bool[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [],
-    "name": "viewCurrentTaskId",
+    "name": "viewLastUnwonPot",
     "outputs": [
       {
         "internalType": "uint256",
@@ -892,8 +1163,13 @@
       {
         "components": [
           {
-            "internalType": "enum StandardLottery.Status",
-            "name": "status",
+            "internalType": "enum DeHubLotterysAbstract.Status",
+            "name": "deLottoStatus",
+            "type": "uint8"
+          },
+          {
+            "internalType": "enum DeHubLotterysAbstract.Status",
+            "name": "deGrandStatus",
             "type": "uint8"
           },
           {
@@ -912,19 +1188,9 @@
             "type": "uint256"
           },
           {
-            "internalType": "uint256[4]",
-            "name": "rewardBreakdown",
-            "type": "uint256[4]"
-          },
-          {
-            "internalType": "uint256[4]",
-            "name": "countWinnersPerBracket",
-            "type": "uint256[4]"
-          },
-          {
-            "internalType": "uint256[4]",
-            "name": "tokenPerBracket",
-            "type": "uint256[4]"
+            "internalType": "uint256",
+            "name": "unwonPreviousPot",
+            "type": "uint256"
           },
           {
             "internalType": "uint256",
@@ -943,11 +1209,21 @@
           },
           {
             "internalType": "uint256",
-            "name": "finalNumber",
+            "name": "deLottoFinalNumber",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "deGrandMaximumWinners",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "deGrandFinalNumber",
             "type": "uint256"
           }
         ],
-        "internalType": "struct StandardLottery.Lottery",
+        "internalType": "struct SpecialLottery.Lottery",
         "name": "",
         "type": "tuple"
       }
@@ -966,43 +1242,14 @@
     "name": "viewLotteryDrawable",
     "outputs": [
       {
-        "internalType": "enum StandardLottery.Status",
+        "internalType": "enum DeHubLotterysAbstract.Status",
         "name": "",
         "type": "uint8"
       },
       {
-        "internalType": "uint256",
+        "internalType": "enum DeHubLotterysAbstract.Status",
         "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "_lotteryId",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "_ticketId",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "_bracket",
-        "type": "uint256"
-      }
-    ],
-    "name": "viewRewardsForTicketId",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
+        "type": "uint8"
       }
     ],
     "stateMutability": "view",
@@ -1033,11 +1280,6 @@
     ],
     "name": "viewUserInfoForLotteryId",
     "outputs": [
-      {
-        "internalType": "uint256[]",
-        "name": "",
-        "type": "uint256[]"
-      },
       {
         "internalType": "uint256[]",
         "name": "",
