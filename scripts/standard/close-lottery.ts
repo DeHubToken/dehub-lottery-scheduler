@@ -41,6 +41,16 @@ const main = async () => {
         contract.randomGenerator()
       ]);
 
+      // Check if contract is paused
+      const paused = await contract.paused();
+
+      const message2 = `Contract was ${paused ? 'paused' : 'not paused'}`;
+      logI(message2);
+
+      if (paused) { // if paused, do not call
+        return;
+      }
+
       // Verify Chainlink VRF Key Hash is set and correct, according to Chainlink documentation, for a given network.
       const randomGeneratorContract = await ethers.getContractAt(RandomGeneratorABI, _randomGenerator);
       const keyHash = await randomGeneratorContract.keyHash();
