@@ -2,7 +2,7 @@ export default {
   StandardLottery: {
     Address: {
       mainnet: "",
-      testnet: "0x34fa1042e8d507742EbC5fD7b9a81943Df206612",
+      testnet: "0x6E25e0505070d0904F5A50763765baA3a0Bf4f27",
     },
     Reward: {
       mainnet: [0, 1000, 2500, 10000],
@@ -13,7 +13,7 @@ export default {
   SpecialLottery: {
     Address: {
       mainnet: "",
-      testnet: "0x1968666CF30825bB49dA5E257687492Db8D7aE3b"
+      testnet: "0x7891040f4E662d31251200A56Fb9569D81ac52ae"
     },
     Interval: 1800, // 172800 // 2 days, unit in seconds
   },
@@ -31,7 +31,7 @@ export default {
   },
   SendGrid: {
     from: "tech@dehub.net",
-    to: "dehub.lottery.report@dehub.net",
-    subject: "Lottery Report",
+    to: "tech@dehub.net",
+    subject: "Raffle Report",
   }
 }
