@@ -1,37 +1,51 @@
 export default {
   StandardLottery: {
     Address: {
-      mainnet: "",
-      testnet: "0x6E25e0505070d0904F5A50763765baA3a0Bf4f27",
+      mainnet: '',
+      testnet: '0x47770273D5847dCc70b16fa7F314FFD31AA5e694',
     },
     Reward: {
       mainnet: [0, 1000, 2500, 10000],
-      testnet: [1000,2500,5000,10000]
+      testnet: [1000, 2500, 5000, 10000],
     },
-    Interval: 1800, // 21600, // 6 hours, uint in seconds
+    Interval: 21600, // 6 hours, uint in seconds
   },
   SpecialLottery: {
     Address: {
-      mainnet: "",
-      testnet: "0x7891040f4E662d31251200A56Fb9569D81ac52ae"
+      mainnet: '',
+      testnet: '0x7A18dB568d76F23e53b582f6F253Ae04713fE151',
     },
-    Interval: 1800, // 172800 // 2 days, unit in seconds
+    Interval: 172800, // 2 days, unit in seconds
   },
   Ticket: {
-    Price: 100000000
+    Price: 100000000,
   },
   Chainlink: {
     VRF: {
       // Documentation: https://docs.chain.link/docs/vrf-contracts/
       KeyHash: {
-        mainnet: "0xc251acd21ec4fb7f31bb8868288bfdbaeb4fbfec2df3735ddbd4f7dc8d60103c",
-        testnet: "0xcaf3c3727e033261d383b315559476f48034c13b18f8cafed4d871abe5049186",
+        mainnet:
+          '0xc251acd21ec4fb7f31bb8868288bfdbaeb4fbfec2df3735ddbd4f7dc8d60103c',
+        testnet:
+          '0xcaf3c3727e033261d383b315559476f48034c13b18f8cafed4d871abe5049186',
       },
     },
+    DeHubRand: {
+      mainnet: '',
+      testnet: '0xA2355ED3bfDec475ff7b79C170A58E1B00fb5F2a',
+    },
+    LINK: {
+      mainnet: '0x404460c6a5ede2d891e8297795264fde62adbb75',
+      testnet: '0x84b9B910527Ad5C03A9Ca831909E21e236EA7b06',
+    },
+  },
+  Report: {
+    BNB: 1, // if BNB balance is below than 1, will report via email
+    LINK: 1, // if LINK balance is below than 1, will report via email
   },
   SendGrid: {
     from: "tech@dehub.net",
     to: "tech@dehub.net",
     subject: "Raffle Report",
-  }
-}
+  },
+};

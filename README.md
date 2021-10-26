@@ -39,17 +39,17 @@ Burnning will take place on:
 
 # Draw standard lottery
 3 */6 1-25 1,3-12 * cd ~/dehub-lottery-scheduler && yarn execute:standard-draw:mainnet
-3 */6 1-24 2 * cd ~/dehub-lottery-scheduler && yarn execute:standard-close:mainnet
+3 */6 1-24 2 * cd ~/dehub-lottery-scheduler && yarn execute:standard-draw:mainnet
 
-3 0 26 1,3-12 * cd ~/dehub-lottery-scheduler && yarn execute:standard-close:mainnet
-3 0 25 2 * cd ~/dehub-lottery-scheduler && yarn execute:standard-close:mainnet
+3 0 26 1,3-12 * cd ~/dehub-lottery-scheduler && yarn execute:standard-draw:mainnet
+3 0 25 2 * cd ~/dehub-lottery-scheduler && yarn execute:standard-draw:mainnet
 
 # Burn unclaimed winnings
 59 23 28-31 * * [ `date -d +'1 day' +\%d` -eq 1 ] && cd ~/dehub-lottery-scheduler && yarn execute:standard-burn:mainnet
 
 # Start standard lottery
 5 */6 1-25 1,3-12 * cd ~/dehub-lottery-scheduler && yarn execute:standard-start:mainnet
-5 */6 1-24 2 * cd ~/dehub-lottery-scheduler && yarn execute:standard-close:mainnet
+5 */6 1-24 2 * cd ~/dehub-lottery-scheduler && yarn execute:standard-start:mainnet
 ```
 
 #### Commands for Special Lottery
@@ -74,8 +74,8 @@ Picking winners in DeGrand second stage will take place on:
 3 0 28 2 * cd ~/dehub-lottery-scheduler && yarn execute:special-pick:mainnet
 
 # Start special lottery
-3 0 26 1,3-12 * cd ~/dehub-lottery-scheduler && yarn execute:special-start:mainnet
-3 0 25 2 * cd ~/dehub-lottery-scheduler && yarn execute:special-start:mainnet
+5 0 26 1,3-12 * cd ~/dehub-lottery-scheduler && yarn execute:special-start:mainnet
+5 0 25 2 * cd ~/dehub-lottery-scheduler && yarn execute:special-start:mainnet
 ```
 
 
