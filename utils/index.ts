@@ -137,5 +137,7 @@ export const reportAmount = async (
     ? ethers.utils.formatEther(linkAmount)
     : undefined;
 
-  emailTransReport({ operator: operator.address, isReportBNB, isReportLINK });
+  if (isReportBNB || isReportLINK) {
+    emailTransReport({ operator: operator.address, isReportBNB, isReportLINK });
+  }
 };
