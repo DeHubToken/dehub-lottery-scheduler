@@ -1,19 +1,35 @@
 [
   {
+    "anonymous": false,
     "inputs": [
       {
-        "internalType": "contract IERC20",
-        "name": "_dehubToken",
+        "indexed": false,
+        "internalType": "address",
+        "name": "previousAdmin",
         "type": "address"
       },
       {
-        "internalType": "contract IDeHubRand",
-        "name": "_randomGenerator",
+        "indexed": false,
+        "internalType": "address",
+        "name": "newAdmin",
         "type": "address"
       }
     ],
-    "stateMutability": "nonpayable",
-    "type": "constructor"
+    "name": "AdminChanged",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "beacon",
+        "type": "address"
+      }
+    ],
+    "name": "BeaconUpgraded",
+    "type": "event"
   },
   {
     "anonymous": false,
@@ -47,6 +63,12 @@
         "indexed": false,
         "internalType": "uint256",
         "name": "finalNumber",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "unwonPot",
         "type": "uint256"
       }
     ],
@@ -85,6 +107,12 @@
         "internalType": "uint256",
         "name": "firstTicketId",
         "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "unwonPreviousPot",
+        "type": "uint256"
       }
     ],
     "name": "LotteryOpen",
@@ -107,6 +135,25 @@
       }
     ],
     "name": "OwnershipTransferred",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [],
+    "name": "Pause",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "account",
+        "type": "address"
+      }
+    ],
+    "name": "Paused",
     "type": "event"
   },
   {
@@ -166,6 +213,51 @@
     "type": "event"
   },
   {
+    "anonymous": false,
+    "inputs": [],
+    "name": "Unpause",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "account",
+        "type": "address"
+      }
+    ],
+    "name": "Unpaused",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "implementation",
+        "type": "address"
+      }
+    ],
+    "name": "Upgraded",
+    "type": "event"
+  },
+  {
+    "inputs": [],
+    "name": "DEAD_ADDRESS",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [],
     "name": "MAX_BUNDLE_RULES",
     "outputs": [
@@ -193,7 +285,7 @@
   },
   {
     "inputs": [],
-    "name": "MAX_TICKETS_PER_BUYCLAIM",
+    "name": "MIN_LENGTH_LOTTERY",
     "outputs": [
       {
         "internalType": "uint256",
@@ -205,16 +297,21 @@
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "MIN_LENGTH_LOTTERY",
-    "outputs": [
+    "inputs": [
       {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
+        "internalType": "contract IERC20Upgradeable",
+        "name": "_dehubToken",
+        "type": "address"
+      },
+      {
+        "internalType": "contract IDeHubRand",
+        "name": "_randomGenerator",
+        "type": "address"
       }
     ],
-    "stateMutability": "view",
+    "name": "__StandardLottery_init",
+    "outputs": [],
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -406,23 +503,10 @@
   },
   {
     "inputs": [],
-    "name": "deadAddress",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
     "name": "dehubToken",
     "outputs": [
       {
-        "internalType": "contract IERC20",
+        "internalType": "contract IERC20Upgradeable",
         "name": "",
         "type": "address"
       }
@@ -439,6 +523,13 @@
       }
     ],
     "name": "drawFinalNumber",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "initialize",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -503,6 +594,26 @@
         "internalType": "address",
         "name": "",
         "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "pause",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "paused",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
       }
     ],
     "stateMutability": "view",
@@ -660,6 +771,19 @@
   {
     "inputs": [
       {
+        "internalType": "address",
+        "name": "_address",
+        "type": "address"
+      }
+    ],
+    "name": "setTransfererAddress",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
         "internalType": "uint256",
         "name": "_endTime",
         "type": "uint256"
@@ -726,6 +850,83 @@
   },
   {
     "inputs": [],
+    "name": "transfererAddress",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "unpause",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "unwonPreviousPot",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "newImplementation",
+        "type": "address"
+      }
+    ],
+    "name": "upgradeTo",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "newImplementation",
+        "type": "address"
+      },
+      {
+        "internalType": "bytes",
+        "name": "data",
+        "type": "bytes"
+      }
+    ],
+    "name": "upgradeToAndCall",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "version",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
     "name": "viewBundleRule",
     "outputs": [
       {
@@ -756,6 +957,19 @@
     "type": "function"
   },
   {
+    "inputs": [],
+    "name": "viewLastUnwonPot",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [
       {
         "internalType": "uint256",
@@ -768,7 +982,7 @@
       {
         "components": [
           {
-            "internalType": "enum StandardLottery.Status",
+            "internalType": "enum DeHubLotterysAbstract.Status",
             "name": "status",
             "type": "uint8"
           },
@@ -804,6 +1018,11 @@
           },
           {
             "internalType": "uint256",
+            "name": "unwonPreviousPot",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
             "name": "amountCollectedToken",
             "type": "uint256"
           },
@@ -826,6 +1045,30 @@
         "internalType": "struct StandardLottery.Lottery",
         "name": "",
         "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_lotteryId",
+        "type": "uint256"
+      }
+    ],
+    "name": "viewLotteryDrawable",
+    "outputs": [
+      {
+        "internalType": "enum DeHubLotterysAbstract.Status",
+        "name": "",
+        "type": "uint8"
+      },
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
       }
     ],
     "stateMutability": "view",
