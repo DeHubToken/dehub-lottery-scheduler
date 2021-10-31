@@ -1,7 +1,9 @@
 # dehub-lottery-scheduler
+
 DeHub lottery operator scheduler.
 
 ### Configuration
+
 - `StandardLottery.Address`: Contract address of StandardLottery
 - `SpecialLottery.Address`: Contract address of SpecialLottery
 - `Rewards`: Rewards tiers breakdown percentages
@@ -12,6 +14,7 @@ DeHub lottery operator scheduler.
 ### Deployment
 
 Operator private key can be overwritten by editign .env
+
 ```shell
 $ yarn execute:[kind]-[command]:[network]
 ```
@@ -23,10 +26,12 @@ Script can be executed by crond service
 Execute standard lottery script by using crond service
 
 DeGrand first stage will take place on:
+
 - 1st ~ 25th every month(except February) every 6 hours
 - 1th ~ 24th February every 6 hours
 
 Burnning will take place on:
+
 - last day of every month 23:59
 
 ```shell
@@ -57,10 +62,12 @@ Burnning will take place on:
 Execute special lottery script by using crond service
 
 DeGrand second stage will take place on:
+
 - 26th, 27th every month(except February) 00:00 ~ 23:59
 - 25th, 26th February 00:00 ~ 23:59
 
 Picking winners in DeGrand second stage will take place on:
+
 - 28th every month(except February) 00:00
 - 27th February 00:00
 
@@ -78,10 +85,37 @@ Picking winners in DeGrand second stage will take place on:
 5 0 25 2 * cd ~/dehub-lottery-scheduler && yarn execute:special-start:mainnet
 ```
 
-
 ### Logging
+
 Logs will be generated at `logs/lottery-YYYY-MM-DD.log`.
 
-
 ### Notification
+
 If transaction failed, service will send email automatically.
+
+## Testnet scheduler
+
+1 hours of process which has all from starting to burning is as following:
+
+```shell
+# Close standard lottery
+15,31 * * * * /home/ubuntu/dehub-raffle-scheduler/standard-close.sh >> /home/ubuntu/close.log 2>&1
+
+# Draw standard lottery
+18,33 * * * * /home/ubuntu/dehub-raffle-scheduler/standard-draw.sh >> /home/ubuntu/draw.log 2>&1
+
+# Start standard lottery
+5,20 * * * * /home/ubuntu/dehub-raffle-scheduler/standard-start.sh >> /home/ubuntu/start.log 2>&1
+
+# Start special lottery
+30 * * * * /home/ubuntu/dehub-raffle-scheduler/special-start.sh >> /home/ubuntu/start.log 2>&1
+
+# Close special lottery
+40 * * * * /home/ubuntu/dehub-raffle-scheduler/special-close.sh >> /home/ubuntu/close.log 2>&1
+
+# Pick DeGrand winners
+42 * * * * /home/ubuntu/dehub-raffle-scheduler/special-pick.sh >> /home/ubuntu/pick.log 2>&1
+
+# Burn unclaimed winnings
+59 * * * * /home/ubuntu/dehub-raffle-scheduler/standard-burn.sh >> /home/ubuntu/burn.log 2>&1
+```
