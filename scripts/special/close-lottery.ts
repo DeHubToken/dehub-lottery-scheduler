@@ -53,6 +53,14 @@ const main = async () => {
         return;
       }
 
+      // Check if current lottery was closed
+      const [status] = await contract.viewLotteryDrawable(_lotteryId);
+      if (status === 2) {
+        // Close
+        logI(`Lottery ${_lotteryId} was already closed`);
+        return;
+      }
+
       // Create, sign and broadcast transaction.
       const tx: TransactionResponse = await contract.closeLottery(
         _lotteryId.toString(),

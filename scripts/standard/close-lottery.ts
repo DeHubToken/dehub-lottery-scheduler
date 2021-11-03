@@ -56,6 +56,14 @@ const main = async () => {
         return;
       }
 
+      // Check if current lottery was closed
+      const [status] = await contract.viewLotteryDrawable(_lotteryId);
+      if (status === 2) {
+        // Close
+        logI(`Lottery ${_lotteryId} was already closed`);
+        return;
+      }
+
       // Verify Chainlink VRF Key Hash is set and correct, according to Chainlink documentation, for a given network.
       const randomGeneratorContract = await ethers.getContractAt(
         RandomGeneratorABI,

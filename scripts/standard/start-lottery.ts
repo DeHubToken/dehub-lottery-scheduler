@@ -36,9 +36,10 @@ const main = async () => {
       logI(`Contract Address: ${contract.address}`);
 
       // Get network data for running script.
-      const [_blockNumber, _gasPrice] = await Promise.all([
+      const [_blockNumber, _gasPrice, _lotteryId] = await Promise.all([
         ethers.provider.getBlockNumber(),
         ethers.provider.getGasPrice(),
+        contract.currentLotteryId(),
       ]);
 
       // Check if contract is paused
@@ -49,6 +50,14 @@ const main = async () => {
 
       if (paused) {
         // if paused, do not call
+        return;
+      }
+
+      // Check if current lottery was started
+      const [status] = await contract.viewLotteryDrawable(_lotteryId);
+      if (status === 1) {
+        // Open
+        logI(`Lottery ${_lotteryId} was already started`);
         return;
       }
 

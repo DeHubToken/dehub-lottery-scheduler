@@ -42,6 +42,14 @@ const main = async () => {
         contract.currentLotteryId(),
       ]);
 
+      // Check if current lottery was burned
+      const [status] = await contract.viewLotteryDrawable(_lotteryId);
+      if (status === 4) {
+        // Burn
+        logI(`Lottery ${_lotteryId} was already burned`);
+        return;
+      }
+
       // Create, sign and broadcast transaction.
       const tx: TransactionResponse = await contract.burnUnclaimed(
         _lotteryId.toString(),
