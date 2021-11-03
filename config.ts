@@ -1,8 +1,8 @@
 export default {
   StandardLottery: {
     Address: {
-      mainnet: '',
-      testnet: '0x47770273D5847dCc70b16fa7F314FFD31AA5e694',
+      mainnet: '0xF5A881B2c1Bc20DBE8E54674d65e8D66487da35e',
+      testnet: '0xee50eF31128678ffc2D70898190Bd705d6969660',
     },
     Reward: {
       mainnet: [0, 1000, 2500, 10000],
@@ -13,8 +13,8 @@ export default {
   },
   SpecialLottery: {
     Address: {
-      mainnet: '',
-      testnet: '0x7A18dB568d76F23e53b582f6F253Ae04713fE151',
+      mainnet: '0xdA9F2a546AfF5deDCF464205B229d18ab35B2d22',
+      testnet: '0xBFC08d0428fe5FAcD503F1eA19433e8cB0A679D7',
     },
     TicketPrice: 500000000,
     Interval: 172800, // 2 days, unit in seconds
@@ -30,7 +30,7 @@ export default {
       },
     },
     DeHubRand: {
-      mainnet: '',
+      mainnet: '0xd441586CeE8839C306aF40cae990D9f580bf1B64',
       testnet: '0xA2355ED3bfDec475ff7b79C170A58E1B00fb5F2a',
     },
     LINK: {
@@ -43,8 +43,8 @@ export default {
     LINK: 1, // if LINK balance is below than 1, will report via email
   },
   SendGrid: {
-    from: "tech@dehub.net",
-    to: "tech@dehub.net",
-    subject: "Raffle Report",
+    from: 'tech@dehub.net',
+    to: 'tech@dehub.net',
+    subject: 'Raffle Report',
   },
 };
