@@ -8,6 +8,7 @@ export default {
       mainnet: [0, 1000, 2500, 10000],
       testnet: [1000, 2500, 5000, 10000],
     },
+    TicketPrice: 100000000,
     Interval: 21600, // 6 hours, uint in seconds
   },
   SpecialLottery: {
@@ -15,10 +16,8 @@ export default {
       mainnet: '',
       testnet: '0x7A18dB568d76F23e53b582f6F253Ae04713fE151',
     },
+    TicketPrice: 500000000,
     Interval: 172800, // 2 days, unit in seconds
-  },
-  Ticket: {
-    Price: 100000000,
   },
   Chainlink: {
     VRF: {
