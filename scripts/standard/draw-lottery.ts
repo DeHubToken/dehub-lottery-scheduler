@@ -53,6 +53,14 @@ const main = async () => {
         return;
       }
 
+      // Check if current lottery is claimable
+      const [status] = await contract.viewLotteryDrawable(_lotteryId);
+      if (status === 3) {
+        // Claimable
+        logI(`Lottery ${_lotteryId} was already claimable`);
+        return;
+      }
+
       // Create, sign and broadcast transaction.
       const tx: TransactionResponse = await contract.drawFinalNumber(
         _lotteryId.toString(),
