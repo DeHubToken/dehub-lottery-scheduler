@@ -2,7 +2,7 @@ export default {
   StandardLottery: {
     Address: {
       mainnet: '0xF5A881B2c1Bc20DBE8E54674d65e8D66487da35e',
-      testnet: '0xee50eF31128678ffc2D70898190Bd705d6969660',
+      testnet: '0x9B90712386955d4c0e628A9B4B0cfad2B96A31D1',
     },
     Reward: {
       mainnet: [0, 1000, 2500, 10000],
@@ -14,7 +14,7 @@ export default {
   SpecialLottery: {
     Address: {
       mainnet: '0xdA9F2a546AfF5deDCF464205B229d18ab35B2d22',
-      testnet: '0xBFC08d0428fe5FAcD503F1eA19433e8cB0A679D7',
+      testnet: '0xa867cd4150a6F13A5D2DCd6BC346716FF3052172',
     },
     TicketPrice: 500000000,
     Interval: 172800, // 2 days, unit in seconds
