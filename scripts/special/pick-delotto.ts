@@ -65,8 +65,8 @@ const main = async () => {
       const tx: TransactionResponse = await contract.pickAwardWinners(
         _lotteryId.toString(),
         {
-          gasLimit: 2000000,
-          gasPrice: _gasPrice.mul(2),
+          // gasLimit: 200000000,
+          // gasPrice: _gasPrice.mul(2),
           from: operator.address,
         }
       );
